@@ -2,12 +2,12 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 {
-    'name': 'Customers Project Construction',
+    'name': 'Zakaria Project Construction',
     'category': 'Extra',
-    'summary': 'Customers Project Construction',
+    'summary': 'Zakaria Project Construction',
     'sequence': 10,
     'version': '1.0',
-    'description': """Customers Project Construction Module for Mohammed Elbahry,
+    'description': """Zakaria Project Construction made by Abdulwahed Freaa at 2021,
      Made By Abdulwahed Freaa """,
     'depends': [],
     'data': [
