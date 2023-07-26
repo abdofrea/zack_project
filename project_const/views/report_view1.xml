@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="report_datasheet_details1_form" model="ir.ui.view">
+        <field name="name">project.wizard1.report.form</field>
+        <field name="model">project.wizard1.report</field>
+        <field name="arch" type="xml">
+            <form string="Details Datasheet Report">
+                <group>
+                    <field name="project_id" string="أسم المشروع" widget='selection'/>
+                </group>
+                <footer>
+                    <button name="get_report_action" type="object" string="Create" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_report_datasheet_details1" model="ir.actions.act_window">
+        <field name="name">Create Datasheet Details</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">project.wizard1.report</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="report_datasheet_details1_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="data_sheet_menu_report1"
+              name="تقرير تفصيلي"
+              groups="project_const.project_cons_group_manager"
+              parent="project_view_menu_report"
+              action="action_report_datasheet_details1"
+              sequence="50"/>
+
+</odoo>

@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<odoo>
+
+
+    <record id="datasheet_grants_tree" model="ir.ui.view">
+        <field name="name">project.grants.tree</field>
+        <field name="model">project.grants</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="grant_name"/>
+                <field name="project_name"/>
+                <field name="date_of_start"/>
+                <field name="date_of_end"/>
+                <field name="total_value"/>
+                <field name="name_of_granted"/>
+                <field name="state"/>
+                <field name="additional_info"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="datasheet_grants_form" model="ir.ui.view">
+        <field name="name">project.grants.form</field>
+        <field name="model">project.grants</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button id="button_confirm" name="makeDraft" type="object" string="مسودة" class="btn-primary"
+                            groups="project_const.project_cons_group_manager" states="open,closed"/>
+                    <button id="button_confirm" name="makeConfirm" type="object" string="مقفلة" class="btn-primary"
+                            groups="project_const.project_cons_group_manager" states="open"/>
+                    <button id="button_cancel" name="makeCancel" type="object" string="مفتوحة" groups="project_const.project_cons_group_manager" states="draft,closed"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div>
+                        <h2>
+                            أسم المشروع
+                            <field name="project_name"/>
+                        </h2>
+                        <h4>
+                            <field name="complete_name"/>
+                        </h4>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="grant_name"/>
+                            <field name="date_of_start"/>
+                            <field name="date_of_end"/>
+                        </group>
+                        <group>
+                            <field name="total_value"/>
+                            <field name="remainder"/>
+                            <field name="grants_expence"/>
+                            <field name="name_of_granted"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="additional_info"/>
+                    </group>
+                    <notebook>
+                        <page string="فواتير تحت العهدة">
+                            <field name="datasheet_ids">
+                                <tree editable="">
+                                    <field name="invoice_or_recipient"/>
+                                    <field name="sheet_number"/>
+                                    <field name="date_of_invoice"/>
+                                    <field name="total_value"/>
+                                    <field name="recipient_name"/>
+                                    <field name="state" widget="badge" decoration-success="state=='confirm'" decoration-warning="state=='draft'"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_datasheet_grants_view" model="ir.actions.act_window">
+        <field name="name">Datasheet Grants info</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">project.grants</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                There is nothing in Attendance yet!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="data_sheet_menu_4"
+              name="عهدة"
+              parent="data_sheet_menu"
+              action="action_datasheet_grants_view"
+              sequence="12"/>
+
+</odoo>
+
+
+

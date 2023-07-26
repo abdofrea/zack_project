@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="statment_item_tree" model="ir.ui.view">
+        <field name="name">project.datasheet.statement.tree</field>
+        <field name="model">project.datasheet.statement</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="statment_item_form" model="ir.ui.view">
+        <field name="name">project.datasheet.statement.form</field>
+        <field name="model">project.datasheet.statement</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_statment_item_view" model="ir.actions.act_window">
+        <field name="name">عناصر البيان</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">project.datasheet.statement</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                There is nothing in Attendance yet!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="data_sheet_menu_20"
+              name="عناصر البيان"
+              parent="project_view_menu_items"
+              action="action_statment_item_view"
+              sequence="75"/>
+
+
+</odoo>

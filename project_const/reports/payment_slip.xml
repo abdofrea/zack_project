@@ -1,0 +1,125 @@
+<odoo>
+    <template id="payment_receive_report_id">
+        <t t-call="web.html_container">
+            <t t-call="web.basic_layout">
+                <div class="page" dir="rtl" style="text-align: right; font-size:18px;">
+                    <h3 style="text-align: center;">ايصال قبض</h3>
+                    <br/>
+                    <table style="width: 80%; text-align: right; direction: rtl;" border="0">
+                        <tbody>
+                            <tr>
+                                <td style="width: 20%; text-align: right;">اسم المشروع:</td>
+                                <td style="width: 20%; text-align: right;"><span t-esc="project_name"/></td>
+                                <td style="width: 20%; text-align: right;">اسم المالك:</td>
+                                <td style="width: 20%; text-align: right;"><span t-esc="clint_name"/></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%; text-align: right;">التاريخ:</td>
+                                <td style="width: 20%; text-align: right;"><span t-esc="date_of_invoice"/></td>
+                                <td style="width: 20%; text-align: right;">القيمة:</td>
+                                <td style="width: 20%; text-align: right;"><span t-esc="'{:,.0f}'.format(round(total_value,0))"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+                    <table style="width: 60%; text-align: right; direction: rtl;" border="0">
+                        <tbody>
+                            <tr>
+                                <td style="width: 20%; text-align: right;">استلمت من:</td>
+                                <td style="width: 40%; text-align: right;">........................................</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%; text-align: right;">مبلغ وقدره:</td>
+                                <td style="width: 20%; text-align: right;">........................................</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%; text-align: right;">طريقة الدفع:</td>
+                                <td style="width: 40%; text-align: right;"><span t-esc="str(payment_method).replace('cash', 'كاش').replace('check', 'شيك').replace('from_owner','مدفوعات من المالك').replace('other','أخرى')"/></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%; text-align: right;">ملاحظة:</td>
+                                <td style="width: 20%; text-align: right;">........................................</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%; text-align: right;">وذلك مقابل:</td>
+                                <td style="width: 40%; text-align: right;">........................................</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%; text-align: right;">اسم المستلم:</td>
+                                <td style="width: 20%; text-align: right;">........................................</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <hr style="height:5px;border-width:0;color:gray;background-color:gray"/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <h3 style="text-align: center;">ايصال قبض</h3>
+                    <br/>
+                    <table style="width: 80%; text-align: right; direction: rtl;" border="0">
+                        <tbody>
+                            <tr>
+                                <td style="width: 20%; text-align: right;">اسم المشروع:</td>
+                                <td style="width: 20%; text-align: right;"><span t-esc="project_name"/></td>
+                                <td style="width: 20%; text-align: right;">اسم المالك:</td>
+                                <td style="width: 20%; text-align: right;"><span t-esc="clint_name"/></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%; text-align: right;">التاريخ:</td>
+                                <td style="width: 20%; text-align: right;"><span t-esc="date_of_invoice"/></td>
+                                <td style="width: 20%; text-align: right;">القيمة:</td>
+                                <td style="width: 20%; text-align: right;"><span t-esc="'{:,.0f}'.format(round(total_value,0))"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+                    <table style="width: 60%; text-align: right; direction: rtl;" border="0">
+                        <tbody>
+                            <tr>
+                                <td style="width: 20%; text-align: right;">استلمت من:</td>
+                                <td style="width: 40%; text-align: right;">........................................</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%; text-align: right;">مبلغ وقدره:</td>
+                                <td style="width: 20%; text-align: right;">........................................</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%; text-align: right;">طريقة الدفع:</td>
+                                <td style="width: 40%; text-align: right;"><span t-esc="str(payment_method).replace('cash', 'كاش').replace('check', 'شيك').replace('from_owner','مدفوعات من المالك').replace('other','أخرى')"/></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%; text-align: right;">ملاحظة:</td>
+                                <td style="width: 20%; text-align: right;">........................................</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%; text-align: right;">وذلك مقابل:</td>
+                                <td style="width: 40%; text-align: right;">........................................</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%; text-align: right;">اسم المستلم:</td>
+                                <td style="width: 20%; text-align: right;">........................................</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+
+                </div>
+            </t>
+        </t>
+    </template>
+
+
+    <record id="payment_receive_report" model="ir.actions.report">
+        <field name="name">سند قبض مالي</field>
+        <field name="model">project.datasheet.payment</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">project_const.payment_receive_report_id</field>
+        <field name="report_file">project_const.payment_receive_report_id</field>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>

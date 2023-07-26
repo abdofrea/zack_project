@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.module.category" id="project_module_management">
+        <field name="name">Shaghaf Access</field>
+        <field name="description">Access Right</field>
+        <field name="sequence">1</field>
+    </record>
+    <record id="project_cons_group_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="category_id" ref="project_const.project_module_management"></field>
+    </record>
+
+    <record id="project_cons_group_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="category_id" ref="project_const.project_module_management"></field>
+    </record>
+</odoo>

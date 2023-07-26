@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<odoo>
+
+
+    <record id="datasheet_type_tree" model="ir.ui.view">
+        <field name="name">project.datasheet.type.tree</field>
+        <field name="model">project.datasheet.type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="invoice_or_recipient"/>
+                <field name="project_id"/>
+                <field name="name"/>
+                <field name="quantity"/>
+                <field name="unit_of_measure"/>
+                <field name="amount"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="action_datasheet_type_view" model="ir.actions.act_window">
+        <field name="name">Datasheet type info</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">project.datasheet.type</field>
+        <field name="view_mode">tree</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                There is nothing in Attendance yet!
+            </p>
+        </field>
+    </record>
+
+
+    <menuitem id="data_sheet_menu_2"
+              name="حركة المواد"
+              parent="data_sheet_menu"
+              action="action_datasheet_type_view"
+              sequence="12"/>
+
+</odoo>
+
+
+

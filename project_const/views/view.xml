@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<odoo>
+
+
+    <record id="datasheet_tree" model="ir.ui.view">
+        <field name="name">project.datasheet.tree</field>
+        <field name="model">project.datasheet</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="project_name"/>
+                <field name="sheet_number"/>
+                <field name="date_of_invoice"/>
+                <field name="statement"/>
+                <field name="total_value"/>
+                <field name="type_ids_name"/>
+                <field name="target_item"/>
+                <field name="additional_info"/>
+                <field name="invoice_number"/>
+                <field name="recipient_number"/>
+                <field name="recipient_name"/>
+                <field name="accumulated_value"/>
+                <field name="project_stage"/>
+                <field name="contractor_share"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="datasheet_form" model="ir.ui.view">
+        <field name="name">project.datasheet.form</field>
+        <field name="model">project.datasheet</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button id="button_confirm" name="makeConfirm" type="object" string="تأكيد" class="btn-primary"
+                            groups="project_const.project_cons_group_manager"
+                            states="draft"/>
+                    <button id="button_cancel" name="makeCancel" type="object" string="الغاء" states="confirm"
+                            groups="project_const.project_cons_group_manager"/>
+                    <field name="state" widget="statusbar"/>
+                    <field name="project_stage" widget="statusbar" options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <div>
+                        <h2>
+                            أسم المشروع
+                            <field name="project_name" widget='selection'/>
+                        </h2>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="date_of_invoice"/>
+                            <field name="total_value"/>
+                            <field name="accumulated_value" groups="project_const.project_cons_group_manager"/>
+                            <field name="sheet_number"/>
+                        </group>
+                        <group>
+                            <field name="invoice_percentage" groups="project_const.project_cons_group_manager"/>
+                            <field name="statement" widget='selection'/>
+                            <field name="target_item"/>
+                            <field name="grant_id" widget='selection'/>
+                        </group>
+                        <group>
+                            <field name="invoice_number"/>
+                            <field name="recipient_number"/>
+                            <field name="recipient_name"/>
+                            <field name="contractor_share" groups="project_const.project_cons_group_manager"/>
+                        </group>
+                        <group>
+                            <field name="additional_info"/>
+                            <field name="image"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="النوع">
+                            <field name="type_ids">
+                                <tree editable="1">
+                                    <field name="name"/>
+                                    <field name="quantity"/>
+                                    <field name="unit_of_measure"/>
+                                    <field name="amount"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="البنود المستهدفة">
+                            <field name="target_item_ids">
+                                <tree editable="1">
+                                    <field name="name" force_save="1" widget='selection'/>
+                                    <field name="percentage"/>
+                                    <field name="invoice_percentage"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="نسبة التوزيع لكل دور">
+                            <field name="distribution_item_ids">
+                                <tree editable="1">
+                                    <field name="name" force_save="1" widget='selection'/>
+                                    <field name="percentage"/>
+                                    <field name="invoice_percentage"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_datasheet_view" model="ir.actions.act_window">
+        <field name="name">جدول مصروفات مشروع</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">project.datasheet</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                There is nothing in Attendance yet!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="data_sheet_menu"
+              name="مصروفات مشروع"
+              groups="project_const.project_cons_group_manager"
+              parent="project_view_menu_root"
+              sequence="10"/>
+
+    <menuitem id="data_sheet_menu_1"
+              name="جدول مصروفات مشروع"
+              parent="data_sheet_menu"
+              action="action_datasheet_view"
+              sequence="10"/>
+
+
+</odoo>
+
+
+

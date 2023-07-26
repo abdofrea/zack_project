@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="target_item_tree" model="ir.ui.view">
+        <field name="name">project.target.item.tree</field>
+        <field name="model">project.target.item</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="target_item_form" model="ir.ui.view">
+        <field name="name">project.target.item.form</field>
+        <field name="model">project.target.item</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+
+    <record id="action_target_item_view" model="ir.actions.act_window">
+        <field name="name">عناصر البند المستهدف</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">project.target.item</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                There is nothing in Attendance yet!
+            </p>
+        </field>
+    </record>
+
+
+    <menuitem id="data_sheet_menu_6"
+              name="عناصر البند المستهدف"
+              parent="project_view_menu_items"
+              action="action_target_item_view"
+              sequence="60"/>
+
+
+
+    <record id="target_tree" model="ir.ui.view">
+        <field name="name">project.target.tree</field>
+        <field name="model">project.target</field>
+        <field name="arch" type="xml">
+            <tree create="false" delete="false" edit="false">
+                <field name="name"/>
+                <field name="statement"/>
+                <field name="sheet_number" optional="hide"/>
+                <field name="date_of_invoice"/>
+                <field name="invoice_or_recipient"/>
+                <field name="project_id"/>
+                <field name="percentage" optional="hide"/>
+                <field name="invoice_percentage"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="project_target_view_search" model="ir.ui.view">
+            <field name="name">project.target.search</field>
+            <field name="model">project.target</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name" string="البند المستهدف"/>
+                    <field name="invoice_or_recipient" string="رقم الفاتورة أو الواصل"/>
+                    <field name="project_id" string="أسم المشروع"/>
+                    <field name="name" string="البيان"/>
+                    <field name="invoice_or_recipient" string="رقم الفاتورة أو الواصل"/>
+                    <field name="project_id" string="أسم المشروع"/>
+                    <group>
+                        <filter name="name" string="البند المستهدف" domain="[]" context="{'group_by':'name'}"/>
+                        <filter name="datasheet_id" string="رقم الفاتورة أو الواصل" domain="[]" context="{'group_by':'datasheet_id'}"/>
+                        <filter name="project_id" string="المشروع" domain="[]" context="{'group_by':'project_id'}"/>
+                        <filter name="statement" string="البيان" domain="[]" context="{'group_by':'statement'}"/>
+                        <filter name="date_of_invoice" string="تاريخ الفاتورة" domain="[]" context="{'group_by':'date_of_invoice'}"/>
+                        <filter name="sheet_number" string="رقم النموذج" domain="[]" context="{'group_by':'sheet_number'}"/>
+                    </group>
+                </search>
+             </field>
+        </record>
+
+
+
+    <record id="action_target_project_target_detailed" model="ir.actions.act_window">
+        <field name="name">البند المستهدف</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">project.target</field>
+        <field name="view_mode">tree</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                There is nothing in Attendance yet!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="detailed_view_menu"
+              name="عرض تفصيلي"
+              parent="project_view_menu_report"
+              sequence="55"/>
+
+    <menuitem id="project_target_detailed_menu"
+              name="البند المستهدف"
+              parent="detailed_view_menu"
+              action="action_target_project_target_detailed"
+              sequence="1"/>
+
+<!--    <menuitem id="data_sheet_menu_7"-->
+<!--              name="البند المستهدف"-->
+<!--              parent="data_sheet_menu"-->
+<!--              action="action_target_view"-->
+<!--              sequence="55"/>-->
+
+
+</odoo>
+
+
+

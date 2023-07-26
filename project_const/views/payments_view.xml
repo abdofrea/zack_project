@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<odoo>
+
+
+    <record id="datasheet_payment_tree" model="ir.ui.view">
+        <field name="name">project.datasheet.payment.tree</field>
+        <field name="model">project.datasheet.payment</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="project_name"/>
+                <field name="date_of_invoice"/>
+                <field name="total_value"/>
+                <field name="payment_type"/>
+                <field name="payment_method"/>
+                <field name="invoice_number"/>
+                <field name="recipient_name"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="datasheet_payment_form" model="ir.ui.view">
+        <field name="name">project.datasheet.payment.form</field>
+        <field name="model">project.datasheet.payment</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button id="button_confirm" name="makeConfirm" type="object" string="تأكيد" class="btn-primary" states="draft"/>
+                    <button id="button_cancel" name="makeCancel" type="object" string="الغاء" states="confirm"/>
+                    <button id="print_report" name="print_report" type="object" string="طباعة" class="btn-primary"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div>
+                        <h2>
+                            أسم المشروع
+                            <field name="project_name"/>
+                        </h2>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="date_of_invoice"/>
+                            <field name="total_value"/>
+                        </group>
+                        <group>
+                            <field name="payment_type" widget='radio' options="{'horizontal': true}"/>
+                            <field name="payment_method" widget='radio' options="{'horizontal': true}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="invoice_number"/>
+                        <field name="recipient_name"/>
+                    </group>
+                    <group>
+                        <field name="additional_info"/>
+                        <field name="image"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+
+    <record id="action_datasheet_payment_view" model="ir.actions.act_window">
+        <field name="name">Datasheet payment info</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">project.datasheet.payment</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                There is nothing in Attendance yet!
+            </p>
+        </field>
+    </record>
+
+
+
+    <menuitem id="data_sheet_menu_3"
+              name="دفعات"
+              parent="data_sheet_menu"
+              action="action_datasheet_payment_view"
+              sequence="11"/>
+
+</odoo>
+
+
+

@@ -1,0 +1,180 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="project_main_kanban" model="ir.ui.view">
+        <field name="name">project.main.kanban</field>
+        <field name="model">project.main</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <field name="project_name"/>
+                <field name="location"/>
+                <field name="clint_name"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attaf-class="oe_kanban_content oe_kanban_global_click o_kanban_get_form">
+                            <div class="row">
+                                <div class="col-12">
+                                    <strong>
+                                        <field name="project_name"/>
+                                    </strong>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-8">
+                                    <field name="location"/>
+                                </div>
+                                <div class="col-4">
+                                    <field name="clint_name"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+    <record id="project_main_tree" model="ir.ui.view">
+        <field name="name">project.main.tree</field>
+        <field name="model">project.main</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="project_name"/>
+                <field name="date_of_start"/>
+                <field name="clint_name"/>
+                <field name="supervisor_engeneer"/>
+                <field name="exepected_cost"/>
+                <field name="accumulated_value"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="project_main_form" model="ir.ui.view">
+        <field name="name">project.main.form</field>
+        <field name="model">project.main</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="project_stage" widget="statusbar" options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="filtered_datasheet_view"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-file-text-o"
+                                string="المصروفات">
+                        </button>
+                        <button name="filtered_payment_view"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-money"
+                                groups="project_const.project_cons_group_manager"
+                                string="دفعات">
+                        </button>
+                        <button name="filtered_grants_view"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-pencil-square-o"
+                                string="عهدة">
+                        </button>
+                    </div>
+                    <div>
+                        <h2>
+                            أسم المشروع:
+                            <field name="project_name"/>
+                        </h2>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="date_of_start" />
+                            <field name="invoice_percentage" groups="project_const.project_cons_group_manager"/>
+                            <field name="clint_name"/>
+                            <field name="location"/>
+                        </group>
+                        <group>
+                            <field name="supervisor_engeneer"/>
+                            <field name="project_maneger"/>
+                            <field name="excpected_end_time"/>
+                            <field name="contract_type"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="معلومات مالية" groups="project_const.project_cons_group_manager">
+                            <group>
+                                <group>
+                                    <field name="exepected_cost"/>
+                                    <field name="total_of_recevied_payment"/>
+                                    <field name="accumulated_value"/>
+                                    <field name="total_expenses"/>
+                                </group>
+                                <group string="أتعاب">
+                                    <field name="expected_total_of_contractor_deduction"/>
+                                    <field name="total_of_contractor_deduction"/>
+                                    <field name="defference_contractor_deduction"/>
+                                </group>
+                                <group>
+                                    <field name="total_remaining"/>
+                                    <field name="total_remaining_grants"/>
+                                    <field name="total_grants"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="معلومات فنية" groups="project_const.project_cons_group_manager">
+                            <group>
+                                <group>
+                                    <field name="area_archtictual"/>
+                                    <field name="area_of_location"/>
+                                </group>
+                                <group>
+                                    <field name="area_constaction"/>
+                                    <field name="area_constaction_long"/>
+                                    <field name="total_area_constaction_long"/>
+                                </group>
+
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+
+    <record id="action_project_main_view" model="ir.actions.act_window">
+        <field name="name">المشاريع</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">project.main</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                There is nothing yet!
+            </p>
+        </field>
+    </record>
+
+
+
+    <menuitem id="project_view_menu_root"
+              name="شغف الإعمار"
+              action="action_project_main_view"
+              sequence="10"/>
+
+
+    <menuitem id="project_view_menu_items"
+              name="عناصر"
+              groups="project_const.project_cons_group_manager"
+              parent="project_view_menu_root"
+              sequence="20"/>
+
+    <menuitem id="project_view_menu_report"
+              name="تقارير"
+              parent="project_view_menu_root"
+              sequence="15"/>
+
+</odoo>
+
+
+

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_project_datasheet_template">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+
+                <div style="text-align:right;">
+                    <table align="right" dir="rtl" style="text-align:right; width: 50%; font-size:18px;" border="none">
+                        <tbody style="border:none;">
+                            <tr style="border:none;">
+                                <td style="border:none; text-align:center; width: 25%; font-size:16;">
+                                    <strong>أسم المشروع</strong>
+                                </td>
+                                <td style="border:none;">
+                                    <strong>
+                                        <span t-esc="project_name"/>
+                                    </strong>
+                                </td>
+                            </tr>
+                            <tr style="border:none;">
+                                <td style="border:none; text-align:center;">اسم الزبون</td>
+                                <td style="border:none;">
+                                    <span t-esc="owner_name"/>
+                                </td>
+                            </tr>
+                            <tr style="border:none;">
+                                <td style="border:none; text-align:center;">اسم الموقع</td>
+                                <td style="border:none;">
+                                    <span t-esc="location"/>
+                                </td>
+                            </tr>
+<!--                            <tr style="border:none;">-->
+<!--                                <td style="border:none; text-align:center;">تاريخ ووقت الاصدار</td>-->
+<!--                                <td style="border:none;">-->
+<!--                                    <span t-esc="date_time"/>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                </div>
+
+                <table class="table-bordered" style="font-size:12px; text-align: center" width="100%">
+                    <tr style="height: 17px;">
+                        <td>
+                            <strong>رقم النموذج</strong>
+                        </td>
+                        <td>
+                            <strong>تاريخ الفاتورة</strong>
+                        </td>
+                        <td>
+                            <strong>البيان</strong>
+                        </td>
+                        <td>
+                            <strong>القيمة</strong>
+                        </td>
+
+                        <td>
+                            <strong>النوع</strong>
+                        </td>
+                        <td>
+                            <strong>البند المستهدف</strong>
+                        </td>
+                        <td width="20%">
+                            <strong>ملاحظات</strong>
+                        </td>
+                        <td>
+                            <strong>فاتورة / واصل</strong>
+                        </td>
+                        <td>
+                            <strong>الاسم</strong>
+                        </td>
+                        <td>
+                            <strong>التراكمي</strong>
+                        </td>
+                        <td>
+                            <strong>المرحلة</strong>
+                        </td>
+<!--                        <td>-->
+<!--                            <strong>الأتعاب</strong>-->
+<!--                        </td>-->
+                    </tr>
+                    <t t-foreach="docs" t-as="line">
+                        <tr>
+
+                            <td name="sheet_number">
+                                <span t-esc="line['sheet_number']"/>
+                            </td>
+                            <td name="date_of_invoice">
+                                <span t-esc="line['date_of_invoice']"/>
+                            </td>
+                            <td name="statement">
+                                <span t-esc="line['statement']"/>
+                            </td>
+                            <td name="total_value" style="color: rgb(51, 102, 255)">
+                                <span t-esc="'{:,.1f}'.format(round(line['total_value'],1))"/>
+                                <!--                                <span t-esc="line['total_value']"/>-->
+                            </td>
+                            <td name="type_i">
+                                <span t-esc="line['type_i']"/>
+                            </td>
+                            <td name="target_item">
+                                <span t-esc="line['target_item']"/>
+                            </td>
+                            <td name="additional_info">
+                                <span t-esc="line['additional_info']"/>
+                            </td>
+                            <td name="additional_info">
+                                <span t-esc="line['invoice_recipient_number']"/>
+                            </td>
+
+                            <td name="recipient_name">
+                                <span t-esc="line['recipient_name']"/>
+                            </td>
+                            <td name="accumulated_value" style="font-weight: bold;">
+                                <span t-esc="'{:,.1f}'.format(round(line['accumulated_value'],1))"/>
+                                <!--                                <span t-esc="line['accumulated_value']"/>-->
+                            </td>
+                            <td name="project_stage" style="font-weight: bold;">
+                                <span t-esc="line['project_stage']"/>
+                                <!--                                <span t-esc="line['accumulated_value']"/>-->
+                            </td>
+<!--                            <td name="contractor_share">-->
+<!--                                <span t-esc="'{:,.1f}'.format(round(line['contractor_share'],1))"/>-->
+<!--                                &lt;!&ndash;                                <span t-esc="line['contractor_share']"/>&ndash;&gt;-->
+<!--                            </td>-->
+                        </tr>
+                    </t>
+                </table>
+            </t>
+            <t t-foreach="imgs" t-as="images">
+                <t t-call="web.basic_layout">
+                    <!--                    <img t-if="image" t-att-src="'data:" />   -->
+                    <!--                    <img t-attf-src="'data:image/png;base64,%s' % to_text(images)" style="max-height: 80px;max-width: 145px;padding:2px;" align="center"/>-->
+                    <span t-esc="images" t-options="{'widget': 'image'}"/>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <!--    <report-->
+    <!--            id="report_project_datasheet"-->
+    <!--            string="Project Datasheet"-->
+    <!--            model="project.datasheet"-->
+    <!--            report_type="qweb-pdf"-->
+    <!--            name="project_const.report_project_datasheet_template"-->
+    <!--            file="project_const.report_project_datasheet_template"-->
+    <!--            print_report_name="('xcv'+'.pdf')" />-->
+
+    <record id="report_project_datasheet" model="ir.actions.report">
+        <field name="name">Project Datasheet</field>
+        <field name="model">project.wizard.report</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">project_const.report_project_datasheet_template</field>
+        <field name="report_file">project_const.report_project_datasheet_template</field>
+        <field name="binding_model_id" ref="model_project_wizard_report"/>
+    </record>
+
+</odoo>
+
+        <!--<report-->
+        <!--            string="Project Datasheet"-->
+        <!--            model="project.datasheet"-->
+        <!--            report_type="qweb-pdf"-->
+        <!--            name="project_const.report_project_datasheet_template"-->
+        <!--            file="project_const.report_project_datasheet_template"-->
+        <!--            print_report_name="XXXX"/>-->
